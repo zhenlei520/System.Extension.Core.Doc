@@ -1,12 +1,12 @@
-<a href="https://github.com/zhenlei520/System.Extension.Core.Doc/blob/1.0/README.zh-cn.md">回到目录</a>
+<a href="https://github.com/zhenlei520/System.Extension.Core.Doc/blob/1.0/README.md">回到目录</a>
 
 # 存储服务 #
 
 
-在Nuget包市场中搜索`EInfrastructure.Core、EInfrastructure.Core.AutoFac`，并安装1.4.0-beta-007版本
+在Nuget包市场中搜索`EInfrastructure.Core、EInfrastructure.Core.AutoFac`，并安装1.*.*版本
 
 ### 七牛云存储 ###
-在Nuget包市场中搜索`EInfrastructure.Core.QiNiu.Storage`，并安装 1.4.0-beta-002版本
+在Nuget包市场中搜索`EInfrastructure.Core.QiNiu.Storage`，并安装 1.*.*版本
 
 在Starup中ConfigureServices中添加AutoFac自动注入，实例为：  
     
