@@ -1,5 +1,4 @@
-### 版本要求：
-&emsp;&emsp;System.Extension.Core需要在NetCore环境下运行。
+System.Extension.Core需要在NetCore环境下运行。
 
 可以使用下列任一命令通过[Nuget](https://www.nuget.org/packages/EInfrastructure.Core/)包管理器进行安装：
 
