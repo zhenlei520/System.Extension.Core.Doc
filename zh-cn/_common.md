@@ -125,4 +125,235 @@
 
 ## 验证帮助类
 
+&emsp;&emsp;是否邮政编码：
+
     "450000".IsZipCode();//输出结果：true
+
+&emsp;&emsp;是否邮箱：
+
+    "wangzhenlei520@gmail.com".IsEmail();//输出结果：true
+
+&emsp;&emsp;是否为手机号：
+
+    "13653777777".IsMobile();//输出结果：true
+
+&emsp;&emsp;是否为固话号：
+
+    "0373-6793210".IsPhone();//输出结果：true
+
+&emsp;&emsp;是否包含数字：
+
+    "123asd".IsNumber();//输出结果：true
+    "123".IsNumber();//输出结果：true
+    "github".IsNumber();//输出结果：false
+
+&emsp;&emsp;是否为纯数字：
+
+    "13653777777".IsOnlyNumber();//输出结果：true
+    "13653777777w".IsOnlyNumber();//输出结果：false
+    "a123a".IsOnlyNumber();//输出结果：false
+    "github".IsOnlyNumber();//输出结果：false
+
+&emsp;&emsp;是否是身份证号（检测比较严，机器识别）：
+
+    "410782199310069652".IsIdCard();//输出结果：false
+
+&emsp;&emsp;判断是否为Guid：
+
+    "77d99c08-a192-4a16-80dd-5e50f6e1c2d2".IsGuid();//输出结果：true
+    "77d99c08-a192-4a16-80dd-5e50f6e1-c2d2".IsGuid();//输出结果：false
+
+
+&emsp;&emsp;是否为IP：
+
+    "192.168.1.124".IsIp();//输出结果：true
+    "a.d.1.124".IsIp();//输出结果：false
+
+&emsp;&emsp;判断是否网址：
+
+    "http://github.com/zhenlei520".IsUrl();//输出结果：true
+    "https://github.com/zhenlei520".IsUrl();//输出结果：true
+    "github.com/zhenlei520".IsUrl();//输出结果：true
+    "百度".IsUrl();//输出结果：false
+
+&emsp;&emsp;判断是否中文：
+
+    "github.com/zhenlei520".IsChinese();//输出结果：false
+    "百度".IsChinese();//输出结果：true
+
+## 枚举帮助类
+
+    /// <summary>
+    /// 性别
+    /// </summary>
+    public enum GenderEnum
+    {
+        /// <summary>
+        /// 未知 
+        /// </summary>
+        [Description("未知")] Unknow = 0,
+
+        /// <summary>
+        /// 男
+        /// </summary>
+        [Description("男")] Boy = 1,
+
+        /// <summary>
+        /// 女
+        /// </summary>
+        [Description("女")] Girl = 2,
+    } 
+
+&emsp;&emsp;得到枚举项的描述信息：
+
+    GenderEnum.Boy.GetDescription();//输出结果：男
+
+&emsp;&emsp;判断值是否在枚举中存在：
+
+    1.IsExist(typeof(GenderEnum));//输出结果：true
+
+&emsp;&emsp;得到枚举字典：
+
+    EnumCommon.ToDescriptionDictionary<GenderEnum>();//返回字典类型，其中key为枚举的值，value为枚举的描述  
+
+## 生肖帮助类
+
+&emsp;&emsp;根据年份获取生肖属性：
+
+    AnimalCommon.GetAnimalFromBirthday(1994);//输出结果：狗
+
+&emsp;&emsp;根据年份获取生肖对象：
+
+    var animal=AnimalCommon.GetAnimalEnumFromBirthday(1994);//输出结果：其中animal.Id为10，animal.Name为狗
+
+## 拷贝帮助类
+
+    /// <summary>
+    /// 性别
+    /// </summary>
+    [Serializable]
+    public class Person : CloneableClass
+    {
+        public string Name { get; set; }
+
+        public GenderEnum Gender { get; set; }
+    }
+
+&emsp;&emsp;深拷贝（其中必须在Class增加[Serializable]）：
+
+    Person person = new Person
+    {
+        Name = "小明",
+        Gender = GenderEnum.Boy
+    };
+    var newPerson = person.DeepClone(person);
+    newPerson.Name = "小明哥";
+    Check.True(person.Name != newPerson.Name, "方法有误");
+
+&emsp;&emsp;浅拷贝（引用地址）：    
+
+    Person person = new Person
+    {
+        Name = "小明",
+        Gender = GenderEnum.Boy
+    };
+    var newPerson2 = person.ShallowClone<Person>();
+    Check.True(person.Name == newPerson2.Name, "方法有误");
+
+## 星座帮助类
+
+&emsp;&emsp;根据日期得到星座名称：
+
+    ConstellationCommon.GetConstellationFromBirthday(DateTime.Parse("1994-11-09"));//输出结果：天蝎座
+
+&emsp;&emsp;根据日期得到星座枚举类：
+
+    ConstellationCommon.GetConstellationEnumFromBirthday(DateTime.Parse("1994-11-09")).Id;//输出结果：8
+
+## 邮箱帮助类
+
+&emsp;&emsp;发送邮件
+
+    EMailCommon.SendEmail(toEmail, title, body, "发送者的邮箱地址", "网络上的代理服务器", "发送邮件的密码", "成功");//输出结果：Status：发送状态，Msg：提示信息
+
+## List帮助类
+
+&emsp;&emsp;List实体添加操作(其中T增加[Serializable])
+
+    [Serializable]
+    public class Person
+    {
+        public string Name { get; set; }
+    }
+
+    public void Add()
+    {
+        List<Person> personList = new List<Person>()
+        {
+            new Person
+            {
+                Name = "小明"
+            }
+        };
+        List<Person> personList2 = new List<Person>()
+        {
+            new Person
+            {
+                Name = "小明"
+            },
+            new Person
+            {
+                Name = "小明花"
+            }
+        };
+        var persons = personList.Add(personList2);
+        persons = personList.Add(personList2,true);
+    }
+
+&emsp;&emsp;List实体减法操作(其中T增加[Serializable])
+
+    List<Person> personList = new List<Person>()
+    {
+        new Person
+        {
+            Name = "小明"
+        },
+        new Person
+        {
+            Name = "小明花2"
+        }
+    };
+    List<Person> personList2 = new List<Person>()
+    {
+        new Person
+        {
+            Name = "小明"
+        },
+        new Person
+        {
+            Name = "小明花"
+        }
+    };
+    var persons = personList.Minus(personList2);
+    persons = personList.Minus(personList2,true);
+
+&emsp;&emsp; List转String（可帮助去除空格）
+
+    List<int> idList = new List<int>()
+    {
+        1, 2, 3
+    };
+    string str = idList.ConvertListToString(',');//输出结果：1,2,3
+
+    List<string> nameList = new List<string>()
+    {
+        "小李",
+        "",
+        "小红"
+    };
+    str = nameList.ConvertListToString(',', true, true);//输出结果：小李,小红
+
+&emsp;&emsp; 字符串数组集合转String（可帮助去除空格）
+
+    new[]{"小李","","小红"}.ConvertListToString(',', true, true);//输出结果：小李,小红
+

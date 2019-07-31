@@ -13,4 +13,4 @@
 <blockquote>基础帮助类库</blockquote>
 
 <p><a href="https://github.com/zhenlei520/System.Extension.Core/tree/release/features-2.0/" target="_blank">GitHub</a>
-<a href="#/zh-cn/">起步</a></p>
+<a href="#/zh-cn/abstract">起步</a></p>
