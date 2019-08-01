@@ -23,6 +23,7 @@
             repo: 'https://github.com/zhenlei520/System.Extension.Core/tree/release/features-2.0',
             homepage: 'quickstart.md',
             alias: {
+                '/':'/zh-cn/abstract',
                 '/.*/_sidebar.md': '/zh-cn/_sidebar.md',
                 '/_sidebar.md': '/zh-cn/_sidebar.md',
                 '/quickstart.md': '/zh-cn/quickstart.md',
@@ -45,35 +46,34 @@
                 '/': '_404.md',
                 '/zh-cn': '/zh-cn/_404.md',
             },
-            search: 'auto', // 默认值
-            search: [
-                '/',// => /README.md
-                '/zh-cn/',      // => /zh-cn/README.md
+            search : [
+                '/zh-cn/quickstart',      // => /zh-cn/quickstart.md
+                '/zh-cn/abstract',      // => /zh-cn/abstract.md
+                '/zh-cn/_common',      // => /zh-cn/_common.md
             ],
-            // // 完整配置参数
-            // search: {
-            //     maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-            //     paths: [], // or 'auto'
-            //     placeholder: 'Type to search',
-            //     // 支持本地化
-            //     placeholder: {
-            //         '/zh-cn/': '搜索',
-            //         '/': 'Type to search'
-            //     },
-            //     noData: 'No Results!',
-            //     // 支持本地化
-            //     noData: {
-            //         '/zh-cn/': '找不到结果',
-            //         '/': 'No Results'
-            //     },
-            //     // 搜索标题的最大程级, 1 - 6
-            //     depth: 2
-            // },
+            // 完整配置参数
+            search: {
+                maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+                paths: [], // or 'auto'
+                // 支持本地化
+                placeholder: {
+                    '/zh-cn/': '搜索',
+                    '/': 'Type to search'
+                },
+                // 支持本地化
+                noData: {
+                    '/zh-cn/': '找不到结果',
+                    '/': 'No Results'
+                },
+                // 搜索标题的最大程级, 1 - 6
+                depth: 3
+            },
             coverpage: {
                 '/': 'cover.md',
                 '/en-us': 'cover.md',
                 '/zh-cn': '/zh-cn/cover.md'
             },
+            onlycover:true,
             disqus: 'shortname'//评论系统
         }
     </script>
@@ -91,13 +91,12 @@
     <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
     <script>
         const gitalk = new Gitalk({
-            clientID: 'Github Application Client ID',
-            clientSecret: 'Github Application Client Secret',
-            repo: 'Github repo',
-            owner: 'Github repo owner',
-            admin: ['Github repo collaborators, only these guys can initialize github issues'],
-            // facebook-like distraction free mode
-            distractionFreeMode: false
+            clientID: '380262dab6700b801321',
+            clientSecret: '2dabb95bcf118b7abe5fa7b22c4bedd97be995eb',
+            repo: 'System.Extension.Core',
+            owner: 'zhenlei520',
+            admin: ['zhenlei520'],
+            distractionFreeMode: true
         })
     </script>
     <!-- 分页 -->
