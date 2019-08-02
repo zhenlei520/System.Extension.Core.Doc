@@ -149,7 +149,7 @@ ConvertToBool obj转bool
 
 将时间格式化成 年月日 的形式,如果时间为null，返回当前系统时间：
 
-	DateTime.Now.GetFormatDate("/");//输出结果：2019/01/01
+	DateTime.Now.GetFormatDate('-');//输出结果：2019/01/01
 
 ### 把秒转换成分钟
 
