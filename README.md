@@ -2,6 +2,8 @@
 
 <!-- <p align="right"><a href="https://github.com/zhenlei520/System.Extension.Core/blob/master/README.md">英文</a></p> -->
 
+[update history](https://github.com/zhenlei520/System.Extension.Core.Doc/tree/2.0/docs/Update.md)
+
 # 大纲
 
 ## 基础方法
