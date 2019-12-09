@@ -199,9 +199,16 @@ ConvertToBool obj转bool
 		
     DateTime.Now.GetAccordingToCurrent();//得到距离当前多远时间 //输出结果：刚刚
 
-### 得到月初与月末时间
+### 得到得到月初/月末/本周一/本周日/本季初/本季末/年初/年末时间 
 		
-    DateTime.Now.Get(TimeType.StartMonth);//得到月初/月末/本周一/本周日/本季初/本季末/年初/年末时间 
+    DateTime.Now.Get(TimeType.StartMonth);//得到月初时间 
+    DateTime.Now.Get(TimeType.EndMonth);//得到月末时间 
+    DateTime.Now.Get(TimeType.StartWeek);//得到本周周一时间 
+    DateTime.Now.Get(TimeType.EndWeek);//得到本周周日时间 
+    DateTime.Now.Get(TimeType.StartQuarter);//得到本季初时间 
+    DateTime.Now.Get(TimeType.EndQuarter);//得到本季末时间 
+    DateTime.Now.Get(TimeType.StartYear);//得到年初时间 
+    DateTime.Now.Get(TimeType.EndYear);//得到年末时间 
 
 ### 得到前N秒的时间
 
