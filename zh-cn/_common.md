@@ -13,7 +13,8 @@
 
 ### MD5加密
 
-    SecurityCommon.GetMd5Hash(param);//默认编码格式：UTF8
+    SecurityCommon.GetMd5Hash(param);//默认编码格式：UTF8，默认大写，32位
+    SecurityCommon.GetMd5HashBy16(param);//默认编码格式：UTF8，默认大写，16位
 	
 ### Des加密与解密
 
@@ -674,7 +675,7 @@ ShallowClone：浅拷贝
     "https://github.com/zhenlei520/System.Extension.Core".UrlDecode(Encoding.UTF8);
 
 ### Html属性编码：
-        
+    
     UrlCommon.AttributeEncode("带编码的字符串");
 
 ### Html编码：
@@ -719,3 +720,94 @@ ShallowClone：浅拷贝
 ### 得到调用者信息
 
     AssemblyCommon.GetReflectedInfo();
+
+## 环境信息
+
+### 得到当前环境信息
+
+    EnvironmentCommon.IsWindows;//判断是否windows系统
+    EnvironmentCommon.IsLinux;//是否Linux操作系统
+    EnvironmentCommon.IsOsx;//是否苹果操作系统
+    EnvironmentCommon.System;//得到当前操作系统
+
+## 字符串扩展
+
+### 得到安全字符串
+
+    " 小磊 ".SafeString();//输出结果：小磊，空格会被移除
+
+
+## 文件帮助类
+
+### 得到文件的md5，sha值等
+
+    FileCommon.GetMd5("本地文件绝对地址");//文件md5
+    FileCommon.GetSha1("本地文件绝对地址");//根据本地文件地址得到文件的Sha1
+    FileCommon.GetSha256("本地文件绝对地址");//根据本地文件地址得到文件的Sha256
+    FileCommon.GetSha384("本地文件绝对地址");//根据本地文件地址得到文件的Sha384
+    FileCommon.GetSha512("本地文件绝对地址");//根据本地文件地址得到文件的Sha512
+
+### 得到文件信息
+
+    FileCommon.GetFiles("要搜索的目录的相对或绝对路径");//得到当前文件夹下的所有文件地址
+
+    FileCommon.GetFiles("要搜索的目录的相对或绝对路径","要与 path 中的文件名匹配的搜索字符串。此参数可以包含有效文本路径和通配符（* 和 ?）的组合（请参见“备注”），但不支持正则表达式");//根据通配符搜索文件下的所有地址信息，可选择查询所有层级的或者当前层级的
+
+## 获取文件内容
+
+### 将文件内容转换成Base64格式 
+
+   FileCommon.FileToBase64("本地文件绝对地址");//将文件转换成Base64格式
+   FileCommon.FileToBase64Async("本地文件绝对地址");//将文件转换成Base64格式（异步）
+
+### 将文件内容转换为byte数组
+
+    FileCommon.ConvertFileToByte("本地文件绝对地址");//将文件内容转换成byte数组
+   FileCommon.ConvertFileToByteAsync("本地文件绝对地址");//将文件内容转换成byte数组（异步）
+
+###  将byte[]数组保存成文件
+
+    FileCommon.SaveByteToFile("byte数组","保存至硬盘的文件路径");//将byte数组保存成文件
+
+### 获取文件内容
+
+    FileCommon.GetFileContent("本地文件绝对地址");//获取文件内容（支持换行读取）
+    FileCommon.GetFileContentAsync("本地文件绝对地址");//获取文件内容（支持换行读取）异步读取
+
+    FileCommon.GetFileContentByLine("本地文件绝对地址");//获取文件内容（每行读取）,返回内容集合，按照行返回
+    FileCommon.GetFileContentAsyncByLine("本地文件绝对地址");//获取文件内容（每行读取）,返回内容集合，按照行返回（异步）
+
+## 自定义属性
+
+    public void GetCustomAttributeValue()
+    {
+        string result =
+            CustomAttributeCommon<ENameAttribute, string>.GetCustomAttributeValue(typeof(UserItem),
+                x => x.Name, "Name");//输出EName
+        string result2 =
+            CustomAttributeCommon<EDescribeAttribute, string>.GetCustomAttributeValue(typeof(UserItem),
+                x => x.Describe, "Name");//输出EDescribe2
+        string result3 =
+            CustomAttributeCommon<EVersionAttribute, string>.GetCustomAttributeValue(typeof(UserItem),
+                x => x.Version);//输出EVersion3
+    }
+
+    /// <summary>
+    /// 用户信息
+    /// </summary>
+    [EVersion("EVersion3")]
+    public class UserItem
+    {
+        /// <summary>
+        /// 描述
+        /// </summary>
+        [EName("描述")]
+        public string Desc { get; set; }
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        [EName("EName")]
+        [EDescribe("EDescribe2")]
+        public string Name { get; set; }
+    }
