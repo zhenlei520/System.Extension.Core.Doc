@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://avatars3.githubusercontent.com/u/9740886?s=90&v=3">
+  <img src="../_media/avatar.png">
 </p>
 
 # System.Extension.Core 2.0

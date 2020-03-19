@@ -1,7 +1,5 @@
 # 基础方法类库(引用EInfrastructure.Core.Tools包后即可使用)
 
-    
-
 ## 加密帮助类
 
     string param="";//待加密的字符串
@@ -28,10 +26,19 @@
 
 ### Sha加密
 
+    string param="";
+    Stream stream;
     SecurityCommon.Sha1(param);//Sha1加密
+    SecurityCommon.Sha1(stream);//Sha1加密
+
     SecurityCommon.Sha256(param);//Sha256加密
+    SecurityCommon.Sha256(stream);//Sha256加密
+
     SecurityCommon.Sha384(param);//Sha384加密
+    SecurityCommon.Sha384(stream);//Sha384加密
+
     SecurityCommon.Sha512(param);//Sha512加密
+    SecurityCommon.Sha512(stream);//Sha512加密
 
 ### HMacSha1加密
 
@@ -57,6 +64,22 @@
 将原信息其中一部分数据替换为特殊字符：
 
     StringCommon.EncryptStr("13653487541","*",3,4);//136****7541
+
+### 首字母小写
+
+    StringCommon.FirstLowerCase("HelloWorld");//输出helloWorld
+
+### 首字母大写
+
+    StringCommon.FirstUpperCase("helloWorld");//输出HelloWorld
+
+### 清除字符串数组中的重复项以及对字符串进行剪切
+
+     List<string> list = new List<string>()
+    {
+        "", "123"
+    };
+    var stringArray = StringCommon.DistinctStringArray(list.ToArray(), 2);//其length为1，其中一列的值为12
 
 ## 类型转换
 
@@ -196,11 +219,11 @@ ConvertToBool obj转bool
 
 将时间格式化成 年月日 的形式,如果时间为null，返回当前系统时间：
 
-	DateTime.Now.GetFormatDate('-');//输出结果：2019/01/01
+	DateTime.Now.GetFormatDate('/');//输出结果：2019/01/01
+	DateTime.Now.GetFormatDate('-');//输出结果：2019-01-01
 
 ### 把秒转换成分钟
 
-    DateTime.Now.SecondToMinute(80);//输出结果：2
     DateTime.Now.SecondToMinute(80,RectificationType.Celling);//输出结果：2
     DateTime.Now.SecondToMinute(80,RectificationType.Floor);//输出结果：1
 
@@ -209,13 +232,10 @@ ConvertToBool obj转bool
     TimeCommon.GetMonthLastDate(2019,1);//输出结果：31
     TimeCommon.GetMonthLastDate(2019,2);//输出结果：28
 
-### 返回时间差
-
-    DateTime.Parse("2019-01-01 12:00:00").DateDiff(DateTime.Now);//输出结果：n月n日或者n小时前或者n分钟前
 
 ### 获得两个日期的间隔
 
-    DateTime.Now.DateDiff2(DateTime.Parse('2019-01-01 12:00:00'));
+    DateTime.Parse("2019-01-01 12:00:00").DateDiff(DateTime.Now);//获得TimeSpan类型
 
 ### 格式化日期时间
 
@@ -772,6 +792,10 @@ ShallowClone：浅拷贝
 
     AssemblyCommon.GetReflectedInfo();
 
+### 获取类型信息
+
+    AssemblyCommon.GetType("EInfrastructure.Core.Tools.Attributes.EDescribeAttribute","EInfrastructure.Core.Tools");//与typeof(EDescribeAttribute)效果相同
+
 ## 环境信息
 
 ### 得到当前环境信息
@@ -783,9 +807,9 @@ ShallowClone：浅拷贝
 
 ## 字符串扩展
 
-### 得到安全字符串
+### 得到安全字符串(期初字符串首尾空格，当值为null时返回空字符串)
 
-    " 小磊 ".SafeString();//输出结果：小磊，空格会被移除
+    " 小磊 ".SafeString();//输出结果：小磊 （空格会被移除）
 
 
 ## 文件帮助类
@@ -894,3 +918,40 @@ ShallowClone：浅拷贝
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
     }
+
+## Enumerable扩展
+
+### 泛型集合转字典
+
+    List<User> list2 = new List<User>()
+    {
+        new User()
+        {
+            Age = 18,
+            Name = "小王"
+        }
+    };
+    Dictionary<string, int> userDic = list2.ToDictionaryExt(x => x.Name, x => x.Age);
+
+    /// <summary>
+    /// 用户信息
+    /// </summary>
+    public class User
+    {
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 年龄
+        /// </summary>
+        public int Age { get; set; }
+    }
+
+## 服务
+
+### 得到继承某个类型的服务集合
+
+    new ServiceProvider().GetServices<IFluentlValidator<TEntity>>();//可以得到IFluentlValidator<TEntity>的实现类集合
+    new ServiceProvider().GetService<IFluentlValidator<TEntity>>();//可以得到IFluentlValidator<TEntity>的第一个实现类
