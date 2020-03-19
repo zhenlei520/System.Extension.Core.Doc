@@ -1,4 +1,6 @@
-# 基础方法类库
+# 基础方法类库(引用EInfrastructure.Core.Tools包后即可使用)
+
+    
 
 ## 加密帮助类
 
@@ -74,19 +76,60 @@ ConvertToBool obj转bool
 
 示例：
 
+### 转换为Char
+
+    obj.ConvertToChar('a');//object类型强转为char类型，如果转换失败，默认为a
+    obj.ConvertToChar();//object类型强转为char类型，如果转换失败，默认为null
+
+### 转换为Guid
+
+    obj.ConvertToGuid(default(Guid));//object类型强转为char类型，如果转换失败，默认为00000000-0000-0000-0000-000000000000
+    obj.ConvertToGuid();//object类型强转为char类型，如果转换失败，默认为null
+
 ### 转换为Int
 
     int i=obj.ConvertToInt(0);//object类型强转为int类型，如果转换失败，默认为0
     int?i=obj.ConvertToInt();//object类型强转为可空的int类型，如果转换失败，默认为Null
+
+### 转换为Long
+
+    long i=obj.ConvertToLong(0);//object类型强转为long类型，如果转换失败，默认为0
+    long?i=obj.ConvertToLong();//object类型强转为可空的long类型，如果转换失败，默认为Null
 
 ### 转换为Decimal
 
     decimal i=obj.ConvertToDecimal(0m);//object类型强转为decimal类型，如果转换失败，默认为0
     decimal?i=obj.ConvertToDecimal();//object类型强转为可空的decimal类型，如果转换失败，默认为Null
 
+### 转换为Double
+
+    double i=obj.ConvertToDouble(0d);//object类型强转为double类型，如果转换失败，默认为0
+    double?i=obj.ConvertToDouble();//object类型强转为可空的double类型，如果转换失败，默认为Null
+
+### 转换为DateTime
+
+    DateTime i=obj.ConvertToDateTime(DateTime.Noe);//object类型强转为DateTime类型，如果转换失败，默认为当前时间
+    DateTime?i=obj.ConvertToDateTime();//object类型强转为可空的DateTime类型，如果转换失败，默认为Null
+    
+### 转换为Float
+
+    float i=obj.ConvertToFloat(0F);//object类型强转为float类型，如果转换失败，默认为0
+    float?i=obj.ConvertToFloat();//object类型强转为可空的float类型，如果转换失败，默认为Null
+
 ### 转换为Short
 
     short i=1.ConvertToShort(0);//object类型墙砖为short类型，如果转换失败，则默认为0，其中0可指定
+    short i=1.ConvertToShort();//object类型墙砖为short类型，如果转换失败，则默认为null
+
+### 转换为bool
+
+    short i=1.ConvertToBool(false);//object类型墙砖为bool类型，如果转换失败，则默认为false，其中智能识别True与TRUE、False与FALSE
+    short i=1.ConvertToBool();//object类型墙砖为bool类型，如果转换失败，则默认为null
+
+### 转换为byte
+
+    byte i=1.ConvertToByte(default(byte));//object类型墙砖为byte类型，如果转换失败，则默认为default(byte)
+    byte i=1.ConvertToByte();//object类型墙砖为byte类型，如果转换失败，则默认为null
 
 所有类型转换均参考此格式。
 
@@ -115,14 +158,17 @@ ConvertToBool obj转bool
 	
     string base64=Stream.ConvertToBase64();
 
-### 清除小数点后0  
+### 保留两位小数并对其四舍五入，如果最后的两位小数为*.00则去除小数位，否则保留两位小数
 		
-	String.ClearDecimal();//其中String为要待去除的字符串
+	"1.011".ClearDecimal();//输出1.01
+    "1.015".ClearDecimal();//输出1.02
+    "1.001".ClearDecimal();//输出1
+    "1.101".ClearDecimal();//输出1.10
 
 ### 得到n为长度的特殊符号  
 		
     TypeConversionCommon.GetContentByEncryption('*', 6);//输出结果：******
-    TypeConversionCommon.GetContentByEncryption("*", 6);//输出结果：******
+    TypeConversionCommon.GetContentByEncryption("*&", 6);//输出结果：*&*&*&*&*&*&
 
 ### 值互换(左边最小值,右边最大值)
 
@@ -644,6 +690,11 @@ ShallowClone：浅拷贝
 
     UniqueCommon.Guids();//输出结果：//80fe4e8c6d1c40848cfe1b7aace339bc
 
+### 获取字符串的HashCode
+
+    string str="hello EInfrastructure.Core";
+    UniqueCommon.GetHashCode(str);//同一个字符串在不同机器上的HashCode一样
+
 ## Url帮助类
 
 ### 得到url地址：
@@ -809,5 +860,37 @@ ShallowClone：浅拷贝
         /// </summary>
         [EName("EName")]
         [EDescribe("EDescribe2")]
+        public string Name { get; set; }
+    }
+
+## 工具类
+
+### 得到参数以及其对象的字典类型集合
+
+    UserItem user=new UserItem(){
+        Name="名字",
+        Desc="描述"
+    };
+    var dic=ToolCommon.GetParams();//其中dic的值是key为name、desc的字典集合，其中key是JsonProperty的Name属性，value为其值，如果希望获取自定义属性的头，需要传第二个参数
+
+    例如：
+    获取FromQuery的Name属性为：
+    ToolCommon.GetParams(data, "Microsoft.AspNetCore.Mvc.FromQueryAttribute,Microsoft.AspNetCore.Mvc.Core");//其customerAttributeTypeName的值为自定义属性的完整类名,类库名
+
+    /// <summary>
+    /// 用户信息
+    /// </summary>
+    public class UserItem
+    {
+        /// <summary>
+        /// 描述
+        /// </summary>
+        [JsonProperty(PropertyName = "desc")]
+        public string Desc { get; set; }
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
     }
