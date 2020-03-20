@@ -2,7 +2,74 @@
 
 &emsp;&emsp;基于RestSharp 106.3进行了一次封装，对简单的post以及get请求使用更方便，下面是Post以及Get请求的例子，首先可以对HttpClient进行初始化，new HttpClient("域名");HttpClient方法对外提供TimeOut超时时间、Headers请求头、Proxy代理、UserAgent请求头、IsHttps是否启用https属性
 
+[![NuGet](https://img.shields.io/nuget/v/EInfrastructure.Core.Http.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Http)
+[![NuGet Download](https://img.shields.io/nuget/dt/EInfrastructure.Core.Http.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Http)
+
+
+
 详细实例可查看<a target="_blank" href="https://github.com/zhenlei520/System.Extension.Core/blob/release/features-2.0/src/Infrastructure/test/EInfrastructure.Core.Test/HttpCommonUnitTest.cs">单元测试</a>
+
+
+&emsp;&emsp;对外提供公开参数：
+
+    只读参数：
+        Host：域名
+
+    可读写：
+        TimeOut：超时时间 默认30000 ms
+        Headers：请求头
+        Proxy：代理
+        UserAgent：浏览器请求信息
+        IsHttps：是否启用https
+
+
+&emsp;&emsp;对外提供公开的方法有：
+    Get请求
+
+        GetString(string url);//得到响应字符串
+        GetString(string url,object data);
+        GetStringAsync(string url);
+        GetStringAsync(string url,object data);
+
+        GetJson<T>(string url);//根据响应的json字符串中得到响应对象
+        GetJson<T>(string url,object data);
+        GetJsonAsync<T>(string url);
+        GetJsonAsync<T>(string url,object data);
+
+        GetXml<T>(string url);//根据响应的xml字符串中得到响应对象
+        GetXml<T>(string url,object data);
+        GetXmlAsync<T>(string url);
+        GetXmlAsync<T>(string url,object data);
+
+        GetBytes(string url);//得到响应字节数组
+        GetBytes(string url, object data);
+        GetBytesAsync(string url);
+        GetBytesAsync(string url, object data);
+
+        GetStream(string url);//得到响应流
+        GetStream(string url, object data);
+        GetStreamAsync(string url);
+        GetStreamAsync(string url, object data);
+
+
+    Post请求
+
+        GetStringByPost(string url,object data);//得到响应字符串
+        GetStringByPostAsync(string url,object data);
+
+        GetJsonByPost<T>(string url,object data);//根据响应的json字符串中得到响应对象
+        GetJsonByPostAsync<T>(string url,object data);
+
+        GetXmlByPost<T>(string url,object data);//根据响应的xml字符串中得到响应对象
+        GetXmlByPostAsync<T>(string url,object data);
+
+        GetBytesByPost(string url, object data);//得到响应字节数组
+        GetBytesByPostAsync(string url, object data);
+
+        GetStreamByPost(string url, object data);//得到响应流
+        GetStreamByPostAsync(string url, object data);
+
+&emsp;&emsp;以下是简单的Demo
 
 ## Get请求
 
