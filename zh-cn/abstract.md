@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../_media/avatar.png">
+  <img src="../_media/cover.svg">
 </p>
 
 # System.Extension.Core 2.0
