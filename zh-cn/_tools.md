@@ -286,33 +286,18 @@ ConvertToBool obj转bool
 
     TimeCommon.FindASecondsAgo();//默认300秒 //假设当前时间为 2019 07-28 12:33:28，输出结果：2019 07-28 12:28:28
 
-### 得到13位时间戳
+### 生成时间戳（10位或者13位）
 
-    DateTime.Now.GetTimeSpan();//输出结果：1564399976948
+    DateTime.Now.ToUnixTimestamp(TimestampType.Second);//输出结果：1564401347
+    DateTime.Now.ToUnixTimestamp(TimestampType.Millisecond);//输出结果：1564404941408
 
-### 获取10位不带毫秒的Unix时间戳
-
-根据DateTime时间格式转换为10位不带毫秒的Unix时间戳：
-
-    DateTime.Now.ConvertDateTimeInt();//输出结果：1564400509
-
-### 将当前Utc时间转换为总秒数
-
-    DateTime.Now.ToUnixTimestamp();//输出结果：1564401347
-
-### 将10位时间戳转时间
+### 将时间戳转时间
 		
     long i=1550558491;
     i.UnixTimeStampToDateTime();//2019/7/29 20:34:32
 
-### 将13位时间戳转为时间
-
-    long i=1550558491000;
-    i.JsTimeStampToDateTime();
-
-### 获得总秒数
-
-    TimeCommon.CurrentTimeMillis();//默认从1970年1月1日 0点0分到现在的总时间 输出结果：1564404941408
+    long j=1550558491000;
+    i.UnixTimeStampToDateTime();//2019-02-19 14:41:31
 
 ### 阳历转阴历(农历)
     
@@ -960,3 +945,63 @@ ShallowClone：浅拷贝
 
     new ServiceProvider().GetServices<IFluentlValidator<TEntity>>();//可以得到IFluentlValidator<TEntity>的实现类集合
     new ServiceProvider().GetService<IFluentlValidator<TEntity>>();//可以得到IFluentlValidator<TEntity>的第一个实现类
+
+## 多线程任务
+
+### 多线程执行任务
+
+
+    public class Users
+    {
+        public string Name { get; set; }
+    }
+
+    例如多线程输出一个消息通知：
+
+    TaskCommon<string> taskCommon = new TaskCommon<string>(20);
+
+    List<Users> users = new List<Users>();
+    for (var i = 0; i < 30; i++)
+    {
+        users.Add(new Users()
+        {
+            Name = "我的名字是" + i
+        });
+    }
+
+    foreach (var item in users)
+    {
+        taskCommon.Add(item.Name, (name) =>
+        {
+            Console.WriteLine("我的名字是：" + name);
+            Thread.Sleep(new Random().Next(1000, 3999));
+        });
+    }
+
+### 多线程执行任务，且任务执行后执行一个方法
+
+    TaskCommon<string, object> taskCommon = new TaskCommon<string, object>(20);
+    List<Users> users = new List<Users>();
+    for (var i = 0; i < 30; i++)
+    {
+        users.Add(new Users()
+        {
+            Name = "我的名字是" + i
+        });
+    }
+
+    foreach (var item in users)
+    {
+        taskCommon.Add(item.Name, (name) =>
+        {
+            Console.WriteLine("我的名字是：" + name);
+            Thread.Sleep(new Random().Next(1000, 3999));
+            return "结束了" + "我的名字是：" + name;
+        }, (state, res, exception) =>
+        {
+            if (state)
+            {
+                //任务完成后需要执行的工作
+            }
+        });
+    }
