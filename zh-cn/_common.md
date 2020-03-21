@@ -51,3 +51,15 @@
         ICollection<IJsonProvider>providers;
         IJsonProvider provider=InjectionSelectionCommon.GetImplement(providers);
 
+### List实体添加操作
+
+    List<string>idList=new List<string>(){"a","b"};
+    List<string>idList2=new List<string>(){"a","b","c"};
+    ListCommon.Add(idList,idList2,true);//去除重复添加
+    ListCommon.Add(idList,idList2,false);//不去除重复添加
+
+### List实体减法操作
+
+    List<string>idList=new List<string>(){"a","b"};
+    List<string>idList2=new List<string>(){"a","b","c"};
+    ListCommon.Except(idList,idList2,true);//从idList中减去idList2的数据，并对重复数据
