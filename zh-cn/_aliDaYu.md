@@ -5,7 +5,49 @@
 [![NuGet](https://img.shields.io/nuget/v/EInfrastructure.Core.AliYun.DaYu.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.AliYun.DaYu)
 [![NuGet Download](https://img.shields.io/nuget/dt/EInfrastructure.Core.AliYun.DaYu.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.AliYun.DaYu)
 
-## 在NetCore下通过IOC注入使用配置：
+## 通过IOC注入使用配置
+
+### 在NetCore下使用
+
+    方法一（推荐）：
+        1. 如果与Mysql数据库结合使用，则引入EInfrastructure.Core.AutoFac.MySql.AspNetCore
+
+            services.AddAliDaYu(()=>{
+                return new AliSmsConfig(){
+                    SignName="签名名称",
+                    AccessKey="AccessKey ID",
+                    EncryptionKey="秘钥参数",
+                };
+            });
+            new EInfrastructure.Core.AutoFac.MySql.AspNetCore.AutofacAutoRegister().Build(
+                    services,
+                    (builder) => { });
+
+        2. 如果与SQLServer数据库结合使用，则引入EInfrastructure.Core.AutoFac.SqlServer.AspNetCore
+
+            services.AddAliDaYu(()=>{
+                return new AliSmsConfig(){
+                    SignName="签名名称",
+                    AccessKey="AccessKey ID",
+                    EncryptionKey="秘钥参数",
+                };
+            });
+            new EInfrastructure.Core.AutoFac.SqlServer.AspNetCore.AutofacAutoRegister().Build(
+                    services,
+                    (builder) => { });
+
+        3. 如果不使用数据库，则引入EInfrastructure.Core.AutoFac.AspNetCore
+
+            services.AddAliDaYu(()=>{
+                return new AliSmsConfig(){
+                    SignName="签名名称",
+                    AccessKey="AccessKey ID",
+                    EncryptionKey="秘钥参数",
+                };
+            });
+            new EInfrastructure.Core.AutoFac.AspNetCore.AutofacAutoRegister().Build(
+                    services,
+                    (builder) => { });
 
 
     方法二：
@@ -27,6 +69,7 @@
         EInfrastructure.Core.Serialize.Xml.StartUp.Run(false);
     }
 
+
     之后在控制器中可以：
 
     public class CheckController : Controller
@@ -45,5 +88,68 @@
             _smsProvider.Send("13653217777","SMS_*******",new {content="内容"},(res)=>{
                 //响应失败原因
             });
+
+            _smsProvider.Send(new List<string>(){"13653217777","13654857777"},"SMS_*******",new {content="内容"},(res)=>{
+                //响应失败原因
+            });
         }
     }
+
+### 在控制台应用程序下使用IOC注入
+
+    多引入类库EInfrastructure.Core.AutoFac
+
+    public IServiceProvider GetServiceProvider(){
+        IConfigurationBuilder Configuration = new ConfigurationBuilder();
+        IConfigurationRoot configuration = Configuration.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables().Build();
+        IServiceCollection services = new ServiceCollection();
+        Assembly[] assembly = AppDomain.CurrentDomain.GetAssemblies();
+        services.AddAliDaYu(()=>{
+                return new AliSmsConfig(){
+                    SignName="签名名称",
+                    AccessKey="AccessKey ID",
+                    EncryptionKey="秘钥参数",
+                };
+            });
+        return new EInfrastructure.Core.AutoFac.AutofacAutoRegister().Build(
+                services,
+                (builder) => { });
+    }
+
+    public static void Main(){
+        var provider=GetServiceProvider().GetService<ISmsProvider>();
+        provider.Send("13653217777","SMS_*******",new {content="内容"},(res)=>{
+            //响应失败原因
+        });
+
+        provider.Send(new List<string>(){"13653217777","13654857777"},"SMS_*******",new {content="内容"},(res)=>{
+            //响应失败原因
+        });
+    }
+
+
+## 传统模式下（非IOC使用）：
+    
+    需要引入EInfrastructure.Core.Serialize.NewtonsoftJson、EInfrastructure.Core.Serialize.Xml后配置
+
+    var smsProvider=new SmsProvider(new AliSmsConfig(){
+        SignName="签名",
+        AccessKey="AccessKey ID",
+        EncryptionKey="秘钥参数"
+    },List<IJsonProvider>()
+    {
+        new NewtonsoftJsonProvider()
+    }, new List<IXmlProvider>()
+    {
+        new XmlProvider()
+    });
+
+    smsProvider.Send("13653217777","SMS_*******",new {content="内容"},(res)=>{
+        //响应失败原因
+    });
+
+    smsProvider.Send(new List<string>(){"13653217777","13654857777"},"SMS_*******",new {content="内容"},(res)=>{
+        //响应失败原因
+    });
