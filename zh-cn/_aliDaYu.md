@@ -12,42 +12,54 @@
     方法一（推荐）：
         1. 如果与Mysql数据库结合使用，则引入EInfrastructure.Core.AutoFac.MySql.AspNetCore
 
-            services.AddAliDaYu(()=>{
-                return new AliSmsConfig(){
-                    SignName="签名名称",
-                    AccessKey="AccessKey ID",
-                    EncryptionKey="秘钥参数",
-                };
-            });
-            new EInfrastructure.Core.AutoFac.MySql.AspNetCore.AutofacAutoRegister().Build(
-                    services,
-                    (builder) => { });
+    //首先在项目的Startup中添加阿里大于的使用以及短信参数配置
+    public IServiceProvider ConfigureServices(IServiceCollection services)
+    {
+        services.AddAliDaYu(()=>{
+            return new AliSmsConfig(){
+                SignName="签名名称",
+                AccessKey="AccessKey ID",
+                EncryptionKey="秘钥参数",
+            };
+        });
+        new EInfrastructure.Core.AutoFac.MySql.AspNetCore.AutofacAutoRegister().Build(
+                services,
+                (builder) => { });
+    }
 
-        2. 如果与SQLServer数据库结合使用，则引入EInfrastructure.Core.AutoFac.SqlServer.AspNetCore
+    2. 如果与SQLServer数据库结合使用，则引入EInfrastructure.Core.AutoFac.SqlServer.AspNetCore
+    
+    //首先在项目的Startup中添加阿里大于的使用以及短信参数配置
+    public IServiceProvider ConfigureServices(IServiceCollection services)
+    {
+        services.AddAliDaYu(()=>{
+            return new AliSmsConfig(){
+                SignName="签名名称",
+                AccessKey="AccessKey ID",
+                EncryptionKey="秘钥参数",
+            };
+        });
+        new EInfrastructure.Core.AutoFac.SqlServer.AspNetCore.AutofacAutoRegister().Build(
+                services,
+                (builder) => { });
+    }
 
-            services.AddAliDaYu(()=>{
-                return new AliSmsConfig(){
-                    SignName="签名名称",
-                    AccessKey="AccessKey ID",
-                    EncryptionKey="秘钥参数",
-                };
-            });
-            new EInfrastructure.Core.AutoFac.SqlServer.AspNetCore.AutofacAutoRegister().Build(
-                    services,
-                    (builder) => { });
+    3. 如果不使用数据库，则引入EInfrastructure.Core.AutoFac.AspNetCore
 
-        3. 如果不使用数据库，则引入EInfrastructure.Core.AutoFac.AspNetCore
-
-            services.AddAliDaYu(()=>{
-                return new AliSmsConfig(){
-                    SignName="签名名称",
-                    AccessKey="AccessKey ID",
-                    EncryptionKey="秘钥参数",
-                };
-            });
-            new EInfrastructure.Core.AutoFac.AspNetCore.AutofacAutoRegister().Build(
-                    services,
-                    (builder) => { });
+    //首先在项目的Startup中添加阿里大于的使用以及短信参数配置
+    public IServiceProvider ConfigureServices(IServiceCollection services)
+    {
+        services.AddAliDaYu(()=>{
+            return new AliSmsConfig(){
+                SignName="签名名称",
+                AccessKey="AccessKey ID",
+                EncryptionKey="秘钥参数",
+            };
+        });
+        new EInfrastructure.Core.AutoFac.AspNetCore.AutofacAutoRegister().Build(
+                services,
+                (builder) => { });
+    }
 
 
     方法二：
