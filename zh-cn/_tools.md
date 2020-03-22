@@ -329,6 +329,10 @@ ConvertToBool obj转bool
         "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"
     });//输出结果：星期一
 
+### 根据身份证号码获取出生日期
+
+    TimeCommon.GetBirthday("41****************");//获取生日，支持15、18位身份证号
+
 ## 验证帮助类
 
 ### 是否邮政编码
@@ -426,13 +430,10 @@ ConvertToBool obj转bool
 
 ## 生肖帮助类
 
-### 根据年份获取生肖属性
+### 根据年份获取生肖信息
 
-    AnimalCommon.GetAnimalFromBirthday(1994);//输出结果：狗
-
-### 根据年份获取生肖对象
-
-    var animal=AnimalCommon.GetAnimalEnumFromBirthday(1994);//输出结果：其中animal.Id为10，animal.Name为狗
+    var animal=AnimalCommon.GetAnimalFromBirthday(1994);//输出结果：其中animal.Id为10，animal.Name为狗
+    var animal=AnimalCommon.GetAnimalFromCardNo("41****************");//输出结果：其中animal.Id为10，animal.Name为狗
 
 ## 拷贝帮助类
 
@@ -477,15 +478,20 @@ ShallowClone：浅拷贝
     var newPerson2 = person.ShallowClone<Person>();
     Check.True(person.Name == newPerson2.Name, "方法有误");
 
+## 性别帮助类
+
+### 根据身份证号码获取性别信息
+
+    GenderCommon.GetGender("41****************");
+
+
 ## 星座帮助类
 
-### 根据日期得到星座名称
+### 根据日期得到星座信息
 
-    ConstellationCommon.GetConstellationFromBirthday(DateTime.Parse("1994-11-09"));//输出结果：天蝎座
-
-### 根据日期得到星座枚举类
-
-    ConstellationCommon.GetConstellationEnumFromBirthday(DateTime.Parse("1994-11-09")).Id;//输出结果：8
+    ConstellationCommon.GetConstellationFromBirthday(DateTime.Parse("1994-11-09")).Id;//输出结果：8
+    ConstellationCommon.GetConstellationFromBirthday(DateTime.Parse("1994-11-09")).Name;//输出结果：天蝎座
+    ConstellationCommon.GetConstellationFromCardNo("41****************").Name;//输出结果：天蝎座
 
 ## 邮箱帮助类
 

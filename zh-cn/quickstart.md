@@ -1,22 +1,8 @@
-System.Extension.Core需要在NetCore环境下运行。
+&emsp;&emsp;System.Extension.Core 框架是netstandard2.0.netstandard2.1 ，可以在netcore2.0以及Framework 4.6.1以上版本运行，详细情况可在微软官方文档中找到。<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/net-standard" target="_blank">查看netstandard的支持版本</a>
 
-可以使用下列任一命令通过[Nuget](https://www.nuget.org/packages/EInfrastructure.Core/)包管理器进行安装：
 
-    Install-Package EInfrastructure.Core -Version 2.0.0-beta-021
-    # OR
-    dotnet add package EInfrastructure.Core --version 2.0.0-beta-021
-    # OR
-    paket add EInfrastructure.Core --version 2.0.0-beta-021
+&emsp;&emsp;源代码请移至<a href="https://github.com/zhenlei520/System.Extension.Core" target="_blank">Github</a>、<a href="https://gitee.com/wangzhenlei/System.Extension.Core" target="_blank">Gitee码云</a>，仓库中的类库已经发布到Nuget、Github，如果需要使用，添加以下源即可，默认项目中已经添加源nuget.org
 
-或者直接编辑*.csproj文件，
 
-    在 <ItemGroup>下增加
-    <PackageReference Include="EInfrastructure.Core" Version="2.0.0-beta-021" />
-
-例如：
-
-    <ItemGroup>
-        <PackageReference Include="EInfrastructure.Core" Version="2.0.0-beta-021" />
-    </ItemGroup>
-
-安装后通过查看项目的工程文件（即csproj文件），查看是否存在EInfrastructure.Core，来检查是否正确安装。
+项目依赖关系简图：
+![avatar](../_media/BaseFlow.png)
