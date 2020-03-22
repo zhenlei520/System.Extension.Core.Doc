@@ -12,6 +12,16 @@
 &emsp;&emsp;其中对NetCore的Web项目有更好的支持，通过简单的配置即可完成对Netcore项目的搭建。
 
 本项目已同步发布至nuget.org以及github，自2.0系列开始，两平台同步发布，因为项目还在不断地优化，建议您升级到最新的正式发布版，预发布版本虽然修复了很多bug，但为了更好的使用，方法的使用上以及命名上后期还有可能变更，如果您有任何问题可进行提问
+如果对项目感兴趣，欢迎大家start，如果您有好建议，也十分欢迎与我留言，如果希望深一步的沟通，可以扫码下方二维码添加好友与我沟通。
+<div>
+  <p align="right">
+    <img style="width:150px;height:150px;" src="../_media/wechat.jpg">
+    <img style="width:150px;height:170px;margin-left:50px;" src="../_media/qq.jpg">
+  </p>
+  <p align="right">
+   
+  </p>
+</div>
 
 项目依赖关系简图：
 ![avatar](../_media/BaseFlow.png)
