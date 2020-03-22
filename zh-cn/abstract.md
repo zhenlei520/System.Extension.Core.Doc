@@ -1,5 +1,5 @@
 <p align="center">
-  <img style="width:80px;height:80px;" src="../_media/cover.svg">
+  <img style="width:80px;height:80px;" src="./_media/cover.svg">
 </p>
 
 # System.Extension.Core 2.0
@@ -15,8 +15,8 @@
 如果对项目感兴趣，欢迎大家start，如果您有好建议，也十分欢迎与我留言，如果希望深一步的沟通，可以扫码下方二维码添加好友与我沟通。
 <div>
   <p align="right">
-    <img style="width:150px;height:150px;" src="../_media/wechat.jpg">
-    <img style="width:150px;height:170px;margin-left:50px;" src="../_media/qq.jpg">
+    <img style="width:150px;height:150px;" src="./_media/wechat.jpg">
+    <img style="width:150px;height:170px;margin-left:50px;" src="./_media/qq.jpg">
   </p>
   <p align="right">
    
