@@ -60,6 +60,14 @@
 
 	"1,2".ConvertStrToList<int>(',');//默认分隔符为,
 
+### 获取字符第N次出现的下标位置
+
+    得到第number次出现character的位置下标 
+    StringCommon.IndexOf("123,1234,4323,2", ',', 2);// 输出结果：8
+
+    得到倒数第number次出现character的位置下标
+    StringCommon.LastIndexOf("123,12341,,4323,2", ',', 2);// 输出结果：10
+
 ### 隐藏手机号码
 
     StringCommon.HideMobile("13653487541");//136****7541
@@ -954,7 +962,7 @@ ShallowClone：浅拷贝
 
 ## 多线程任务
 
-### 多线程执行任务
+### 多线程执行任务（可控制最大线程数）
 
 
     public class Users
@@ -984,7 +992,7 @@ ShallowClone：浅拷贝
         });
     }
 
-### 多线程执行任务，且任务执行后执行一个方法
+### 多线程执行任务，且任务执行后执行一个方法（可控制最大线程数）
 
     TaskCommon<string, object> taskCommon = new TaskCommon<string, object>(20);
     List<Users> users = new List<Users>();
@@ -1011,3 +1019,47 @@ ShallowClone：浅拷贝
             }
         });
     }
+
+## 多线程任务（无法控制最大线程数）
+
+### 执行多个操作，等待所有操作完成
+
+    TaskCommon.WaitAll(()=>{
+        Console.WriteLine("输出第一句话");
+    },()=>{
+        Console.WriteLine("输出第二句话");
+    });
+
+### 并发执行多个操作
+
+    TaskCommon.ParallelExecute(()=>{
+        Console.WriteLine("输出第一句话");
+    },()=>{
+        Console.WriteLine("输出第二句话");
+    });
+
+### 重复的并发执行操作
+
+    TaskCommon.ParallelExecute(()=>{
+         Console.WriteLine("输出第一句话");
+    })
+
+### 创建线程任务（有响应值/无响应值）
+
+    var task1 = TaskCommon.Create((cts)=>{
+        Console.WriteLine("创建线程任务");
+    });
+
+### 单任务串行（有响应值/无响应值）
+
+    task1.And((cts)=>{
+         Console.WriteLine("创建线程任务1");
+    });
+    
+### 多任务并行
+
+    task1.Or((cts)=>{
+         Console.WriteLine("创建线程任务1");
+    },(cts)=>{
+         Console.WriteLine("创建线程任务2");
+    });

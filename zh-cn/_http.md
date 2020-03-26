@@ -6,7 +6,6 @@
 [![NuGet Download](https://img.shields.io/nuget/dt/EInfrastructure.Core.Http.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Http)
 
 
-
 详细实例可查看<a target="_blank" href="https://github.com/zhenlei520/System.Extension.Core/blob/release/features-2.0/src/Infrastructure/test/EInfrastructure.Core.Test/HttpCommonUnitTest.cs">单元测试</a>
 
 
@@ -99,14 +98,6 @@
 
     如果希望获取到Json对象，则可使用方法GetJson，如果响应内容为xml格式，则可使用GetXml方法，如果希望获取到字节数组，则使用方法GetBytes，如果希望获取响应流，则使用方法GetStream
 
-### GetJson get请求获取响应json对象（GetJsonAsync 异步）
-
-### GetXml get请求获取响应xml对象（GetXmlAsync 异步）
-
-### GetBytes get请求获取响应字节数组（GetBytesAsync 异步）
-
-### GetStream get请求获取响应流（GetStreamAsync 异步）
-
 ## Post请求
 
 ### GetStringByPost post请求获取响应字符串（PostByStringAsync 异步）
@@ -174,12 +165,6 @@
     }
 
     如果响应信息为Xml，可以通过GetXmlByPost得到，如果想使用异步，可以用PostByXmlAsync方法，如果希望获取响应流，可以使用GetStreamByPost方法，如果希望获取字节数组，可以使用GetBytesByPost，其中Data数据可使用匿名对象或者非匿名对象，不过非匿名对象的参数名可以通过指定JsonProperty的对其进行更改。
-
-### PostByXmlAsync post请求获取响应xml对象（PostByXmlAsync 异步）
-
-### PostByBytes post请求获取响应字节数组（PostByBytesAsync 异步）
-
-### PostByStreamAsync post请求获取响应流信息（PostByStreamAsync 异步）
 
 
 
