@@ -8,7 +8,7 @@
   * [基础方法类库扩展](/zh-cn/_common.md)
   * [Ioc自动注入](/zh-cn/_autofac.md)
   * [阿里短信类库扩展](/zh-cn/_aliDaYu.md)
-  * [七牛云存储类库扩展](/zh-cn/_qiniuStorage.md)
+  <!-- * [七牛云存储类库扩展](/zh-cn/_qiniuStorage.md) -->
 
   
 
