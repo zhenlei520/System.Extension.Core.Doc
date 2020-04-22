@@ -10,29 +10,59 @@
 
 在NetCore下使用
 
+一、引入包
 
-    方法一（推荐）：
     1. 如果与Mysql数据库结合使用，则引入EInfrastructure.Core.AutoFac.MySql.AspNetCore
 
     //首先在项目的Startup中添加阿里大于的使用以及短信参数配置
     public IServiceProvider ConfigureServices(IServiceCollection services)
     {
         services.AddQiNiuStorage(()=>{
-            return new QiNiuStorageConfig(){
-                AccessKey="公钥",
-                SecretKey="秘钥",
-                Zones=ZoneEnum.ZoneCnSouth,//存储空间存储区域
-                Host:'主机域',
-                Bucket:'空间名',
-                PersistentPipeline:'传输队列',//用于加快处理文件
-                PersistentNotifyUrl："持久化结果通知",
-                CallbackUrl="上传成功后，七牛云向业务服务器发送 POST 请求的 URL",
-                CallbackBody="回调内容",//（可不填）
-                CallbackBodyType="EInfrastructure.Core.Configuration.Ioc.Plugs.Storage.Enumerations.CallbackBodyType.Json.Id",//（回调内容类型，默认json，可不填）
-                CallbackAuthHost="鉴权回调域，",
-            };
+            var config = new QiNiuStorageConfig("accessKey", "secretKey", ZoneEnum.ZoneCnSouth, "访问图片域名", "空间名");
+            return config;//七牛配置信息，默认上传后不回调
         });
-        new EInfrastructure.Core.AutoFac.MySql.AspNetCore.AutofacAutoRegister().Build(
-                services,
-                (builder) => { });
+        return EInfrastructure.Core.AutoFac.MySql.AspNetCore.AutofacAutoRegister.Use(services, (builder) => { });
     }
+
+    2. 如果不使用数据库结合使用，则只引入EInfrastructure.Core.AutoFac.AspNetCore
+    public IServiceProvider ConfigureServices(IServiceCollection services)
+    {
+        services.AddQiNiuStorage(()=>{
+            var config = new QiNiuStorageConfig("accessKey", "secretKey", ZoneEnum.ZoneCnSouth, "访问图片域名", "空间名");
+            return config;//七牛配置信息，默认上传后不回调
+        });
+        return EInfrastructure.Core.AutoFac.AspNetCore.AutofacAutoRegister.Use(services, (builder) => { });
+    }
+
+二、使用七牛操作文件信息
+
+通过上方的配置可以在控制器中使用IStorageProvider、IPictureProvider两个接口的方法
+
+    1. IStorageProvider 文件存储管理
+    2. IPictureProvider 图片存储管理
+
+    其中IPictureProvider对外提供了以下方法：
+        
+        1. 根据图片base64上传 Upload
+        2. 抓取资源到空间  FetchFile
+
+    其中IStorageProvider对外提供了以下方法：
+
+        1. 根据文件流上传 UploadStream
+        2. 根据文件字节数组上传  UploadByteArray
+        3. 根据文件Token上传 UploadByToken
+        4. 得到上传文件凭证 GetUploadCredentials
+        5. 检查文件是否存在 Exist
+        6. 获取文件信息 Get
+        7. 获取文件信息集合（超过1000个时会自动分批获取） GetList
+        8. 根据文件key删除 Remove
+        9. 根据文件key集合删除（超过1000个时会自动分批删除） RemoveRange
+        10. 复制文件（两个文件需要在同一账号下） CopyTo
+        11. 复制文件集合（两个文件需要在同一账号下，超过1000个时会自动分批复制） CopyRangeTo
+        12. 移动文件（两个文件需要在同一账号下） Move
+        13. 批量移动文件（两个文件需要在同一账号下，超过1000个时会自动分批移动） MoveRange
+
+    具体的方法用法可查看源码使用，其中定义的比较简单，在调用时也有相对应的注释，如果确实有不容易理解的会在文档中标注。
+
+  
+&emsp;&emsp;<a href ="https://github.com/zhenlei520/System.Extension.Core.Demo/tree/master/Storage/System.Extension.Core.AspNetCore.QiNiuStorage" target="_blank">点击查看完整示例</a> 
