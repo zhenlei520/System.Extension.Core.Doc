@@ -88,3 +88,5 @@
 
   
 &emsp;&emsp;<a href ="https://github.com/zhenlei520/System.Extension.Core.Demo/tree/master/Storage/System.Extension.Core.AspNetCore.QiNiuStorage" target="_blank">点击查看完整示例</a> 
+
+以上代码支持最新预览版，且自2.0.1-beta-027后，云存储默认配置中只有默认空间，默认空间域以及默认空间对应的区域，如果希望某个方法不对默认配置中的空间操作，请配置参数中的策略属性
