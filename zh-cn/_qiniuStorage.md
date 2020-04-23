@@ -28,7 +28,7 @@
     public IServiceProvider ConfigureServices(IServiceCollection services)
     {
         services.AddQiNiuStorage(()=>{
-            var config = new QiNiuStorageConfig("accessKey", "secretKey", ZoneEnum.ZoneCnSouth, "访问图片域名", "空间名");
+            var config = new QiNiuStorageConfig("accessKey", "secretKey", ZoneEnum.ZoneCnSouth(默认空间域), "默认空间所属域名", "默认空间名");
             return config;//七牛配置信息，默认上传后不回调
         });
         return EInfrastructure.Core.AutoFac.AspNetCore.AutofacAutoRegister.Use(services, (builder) => { });
@@ -40,11 +40,13 @@
 
     1. IStorageProvider 文件存储管理
     2. IPictureProvider 图片存储管理
+    3. IBucketProvider 空间管理
 
     其中IPictureProvider对外提供了以下方法：
         
         1. 根据图片base64上传 Upload
         2. 抓取资源到空间  FetchFile
+        3. 空间管理 IBucketProvider
 
     其中IStorageProvider对外提供了以下方法：
 
@@ -61,15 +63,26 @@
         11. 复制文件集合（两个文件需要在同一账号下，超过1000个时会自动分批复制） CopyRangeTo
         12. 移动文件（两个文件需要在同一账号下） Move
         13. 批量移动文件（两个文件需要在同一账号下，超过1000个时会自动分批移动） MoveRange
-        14. 得到公开空间的访问地址
-        15. 得到私有空间的访问地址
-        16. 下载文件到本地
-        17. 设置生存时间（超时会自动删除）
-        18. 批量设置生存时间（超时会自动删除）
-        19. 修改文件MimeType
-        20. 批量更改文件mime
-        21. 修改文件存储类型
-        22. 批量更改文件类型
+        14. 得到公开空间的访问地址 GetPublishUrl
+        15. 得到私有空间的访问地址 GetPrivateUrl
+        16. 下载文件到本地 Download
+        17. 设置生存时间（超时会自动删除） SetExpire
+        18. 批量设置生存时间（超时会自动删除） SetExpireRange
+        19. 修改文件MimeType ChangeMime
+        20. 批量更改文件mime ChangeMimeRange
+        21. 修改文件存储类型 ChangeType
+        22. 批量更改文件类型 ChangeTypeRange
+
+    其中IBucketProvider对外提供以下方法
+
+        1. 获取空间列表 GetBucketList
+        2. 创建空间 Create
+        3. 设置空间的镜像源 SetSource
+        4. 删除空间 Delete
+        5. 获取域名空间信息 SetPermiss
+        6. 设置空间访问权限 SetTag
+        7. 得到空间标签 GetTags
+        8. 清除空间标签 ClearTag
 
     具体的方法用法可查看源码使用，其中定义的比较简单，在调用时也有相对应的注释，如果确实有不容易理解的会在文档中标注。
 
