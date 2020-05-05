@@ -54,35 +54,38 @@
         2. 根据文件字节数组上传  UploadByteArray
         3. 根据文件Token上传 UploadByToken
         4. 得到上传文件凭证 GetUploadCredentials
-        5. 检查文件是否存在 Exist
-        6. 获取文件信息 Get
-        7. 获取文件信息集合（超过1000个时会自动分批获取） GetList
-        8. 根据文件key删除 Remove
-        9. 根据文件key集合删除（超过1000个时会自动分批删除） RemoveRange
-        10. 复制文件（两个文件需要在同一账号下） CopyTo
-        11. 复制文件集合（两个文件需要在同一账号下，超过1000个时会自动分批复制） CopyRangeTo
-        12. 移动文件（两个文件需要在同一账号下） Move
-        13. 批量移动文件（两个文件需要在同一账号下，超过1000个时会自动分批移动） MoveRange
-        14. 得到公开空间的访问地址 GetPublishUrl
-        15. 得到私有空间的访问地址 GetPrivateUrl
-        16. 下载文件到本地 Download
-        17. 设置生存时间（超时会自动删除） SetExpire
-        18. 批量设置生存时间（超时会自动删除） SetExpireRange
-        19. 修改文件MimeType ChangeMime
-        20. 批量更改文件mime ChangeMimeRange
-        21. 修改文件存储类型 ChangeType
-        22. 批量更改文件类型 ChangeTypeRange
+        5. 得到管理凭证 GetManageToken
+        6. 得到下载凭证 GetDownloadToken
+        7. 检查文件是否存在 Exist
+        8. 获取文件信息 Get
+        9. 获取文件信息集合（超过1000个时会自动分批获取） GetList
+        10. 根据文件key删除 Remove
+        11. 根据文件key集合删除（超过1000个时会自动分批删除） RemoveRange
+        12. 复制文件（两个文件需要在同一账号下） CopyTo
+        13. 复制文件集合（两个文件需要在同一账号下，超过1000个时会自动分批复制） CopyRangeTo
+        14. 移动文件（两个文件需要在同一账号下） Move
+        15. 批量移动文件（两个文件需要在同一账号下，超过1000个时会自动分批移动） MoveRange
+        16. 得到公开空间的访问地址 GetPublishUrl
+        17. 得到私有空间的访问地址 GetPrivateUrl
+        18. 下载文件到本地 Download
+        19. 设置生存时间（超时会自动删除） SetExpire
+        20. 批量设置生存时间（超时会自动删除） SetExpireRange
+        21. 修改文件MimeType ChangeMime
+        22. 批量更改文件mime ChangeMimeRange
+        23. 修改文件存储类型 ChangeType
+        24. 批量更改文件类型 ChangeTypeRange
 
     其中IBucketProvider对外提供以下方法
 
         1. 获取空间列表 GetBucketList
         2. 创建空间 Create
         3. 设置空间的镜像源 SetSource
-        4. 删除空间 Delete
-        5. 获取域名空间信息 SetPermiss
-        6. 设置空间访问权限 SetTag
-        7. 得到空间标签 GetTags
-        8. 清除空间标签 ClearTag
+        4. 获取空间域名信息 GetHost
+        5. 删除空间 Delete
+        6. 获取域名空间信息 SetPermiss
+        7. 设置空间访问权限 SetTag
+        8. 得到空间标签 GetTags
+        9. 清除空间标签 ClearTag
 
     具体的方法用法可查看源码使用，其中定义的比较简单，在调用时也有相对应的注释，如果确实有不容易理解的会在文档中标注。
 
