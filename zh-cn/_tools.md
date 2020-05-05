@@ -721,8 +721,9 @@ ShallowClone：浅拷贝
 
 ### 雪花id生成算法（long类型的主键id）
 
-   SnowflakeId sn = new SnowflakeId(15, 3);
-   sn.NextId();//得到id
+    SnowflakeId sn = new SnowflakeId(15, 3);
+    
+    sn.NextId();//得到id
 
 
 ## Url帮助类
