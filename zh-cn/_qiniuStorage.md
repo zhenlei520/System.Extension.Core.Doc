@@ -74,6 +74,7 @@
         22. 批量更改文件mime ChangeMimeRange
         23. 修改文件存储类型 ChangeType
         24. 批量更改文件类型 ChangeTypeRange
+        25. 获取指定前缀的文件列表 ListFiles
 
     其中IBucketProvider对外提供以下方法
 
@@ -92,4 +93,6 @@
   
 &emsp;&emsp;<a href ="https://github.com/zhenlei520/System.Extension.Core.Demo/tree/master/Storage/System.Extension.Core.AspNetCore.QiNiuStorage" target="_blank">点击查看完整示例</a> 
 
-以上代码支持最新预览版，且自2.0.1-beta-027后，云存储默认配置中只有默认空间，默认空间域以及默认空间对应的区域，如果希望某个方法不对默认配置中的空间操作，请配置参数中的策略属性
+&emsp;&emsp;以上代码支持最新预览版，且自2.0.1-beta-027后，云存储默认配置中只有默认空间，默认空间域以及默认空间对应的区域，如果希望某个方法不对默认配置中的空间操作，请配置参数中的策略属性
+
+&emsp;&emsp;七牛存储是通过单例模式进行诸如，目前如果在一个项目中如果只使用一个账号的情况下可通过ioc进行注入，但如果你的场景是需要用到多个七牛账号进行操作的话，建议您直接通过初始化BucketProvider、StorageProvider、PictureProvider类进行操作，相比单例模式，仅仅只是默认配置文件的差别，之前有想过再分一个包来处理，但仔细想过之后发现效果与直接初始化BucketProvider、StorageProvider、PictureProvider类类似，所以就没继续进行分离，如果您有这方面的场景需要，可通过此方法进行，如果您的场景下除了七牛云存储外可能还有阿里云oss、腾讯云oss的可能性，后期包也会提供，您当前可以通过再分拆阿里云、七牛云、腾讯云三个类库后引用不同的EInfrastructure.Core的存储包，为您节省了参数响应以及传参不统一的问题，之后上线阿里云以及腾讯云oss后为您节省更多的开发时间，如果您有其他的oss存储空间的话，也欢迎您与我们的包进行集成，让其集成变得更简单
