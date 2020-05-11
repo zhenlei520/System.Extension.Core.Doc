@@ -22,6 +22,7 @@
             },
             repo: 'https://github.com/zhenlei520/System.Extension.Core/tree/release/features-2.0',
             homepage: 'quickstart.md',
+            basePath:'/',
             alias: {
                 '/_aliDaYu.md': '/zh-cn/_aliDaYu.md',
                 '/_autofac.md': '/zh-cn/_autofac.md',
@@ -52,22 +53,10 @@
                 '/': '_404.md',
                 '/zh-cn': '/zh-cn/_404.md',
             },
-            search : [
-                '/zh-cn/_aliDaYu',      // => /zh-cn/_aliDaYu.md
-                '/zh-cn/_autofac',      // => /zh-cn/_autofac.md
-                '/zh-cn/_common',      // => /zh-cn/_common.md
-                '/zh-cn/_configEntities',      // => /zh-cn/_configEntities.md
-                '/zh-cn/_http',      // => /zh-cn/_http.md
-                '/zh-cn/_recommend',      // => /zh-cn/_recommend.md
-                '/zh-cn/_sidebar',      // => /zh-cn/_sidebar.md
-                '/zh-cn/_tools',      // => /zh-cn/_tools.md
-                '/zh-cn/abstract',      // => /zh-cn/abstract.md
-                '/zh-cn/quickstart',      // => /zh-cn/quickstart.md
-            ],
             // 完整配置参数
             search: {
                 maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-                paths: [], // or 'auto'
+                paths: 'auto', // or 'auto'
                 // 支持本地化
                 placeholder: {
                     '/zh-cn/': '搜索',
