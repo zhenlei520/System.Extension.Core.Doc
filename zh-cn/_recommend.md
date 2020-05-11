@@ -19,7 +19,7 @@
 
     基于RestSharp 106.3进行了一次封装，对简单的post以及get使用更方便。
 
-&emsp;&emsp;[EInfrastructure.Core.Tools](/zh-cn/_tools_.md)&nbsp;[![NuGet](https://img.shields.io/nuget/v/EInfrastructure.Core.Tools.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Tools)
+&emsp;&emsp;[EInfrastructure.Core.Tools](/zh-cn/_tools.md)&nbsp;[![NuGet](https://img.shields.io/nuget/v/EInfrastructure.Core.Tools.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Tools)
 [![NuGet Download](https://img.shields.io/nuget/dt/EInfrastructure.Core.Tools.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Tools)
 
     一个不依赖其他类库的工具包，其中封装了很多我们常用的方法。

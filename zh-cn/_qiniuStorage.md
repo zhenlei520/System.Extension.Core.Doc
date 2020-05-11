@@ -54,39 +54,45 @@
         2. 根据文件字节数组上传  UploadByteArray
         3. 根据文件Token上传 UploadByToken
         4. 得到上传文件凭证 GetUploadCredentials
-        5. 检查文件是否存在 Exist
-        6. 获取文件信息 Get
-        7. 获取文件信息集合（超过1000个时会自动分批获取） GetList
-        8. 根据文件key删除 Remove
-        9. 根据文件key集合删除（超过1000个时会自动分批删除） RemoveRange
-        10. 复制文件（两个文件需要在同一账号下） CopyTo
-        11. 复制文件集合（两个文件需要在同一账号下，超过1000个时会自动分批复制） CopyRangeTo
-        12. 移动文件（两个文件需要在同一账号下） Move
-        13. 批量移动文件（两个文件需要在同一账号下，超过1000个时会自动分批移动） MoveRange
-        14. 得到公开空间的访问地址 GetPublishUrl
-        15. 得到私有空间的访问地址 GetPrivateUrl
-        16. 下载文件到本地 Download
-        17. 设置生存时间（超时会自动删除） SetExpire
-        18. 批量设置生存时间（超时会自动删除） SetExpireRange
-        19. 修改文件MimeType ChangeMime
-        20. 批量更改文件mime ChangeMimeRange
-        21. 修改文件存储类型 ChangeType
-        22. 批量更改文件类型 ChangeTypeRange
+        5. 得到管理凭证 GetManageToken
+        6. 得到下载凭证 GetDownloadToken
+        7. 检查文件是否存在 Exist
+        8. 获取文件信息 Get
+        9. 获取文件信息集合（超过1000个时会自动分批获取） GetList
+        10. 根据文件key删除 Remove
+        11. 根据文件key集合删除（超过1000个时会自动分批删除） RemoveRange
+        12. 复制文件（两个文件需要在同一账号下） CopyTo
+        13. 复制文件集合（两个文件需要在同一账号下，超过1000个时会自动分批复制） CopyRangeTo
+        14. 移动文件（两个文件需要在同一账号下） Move
+        15. 批量移动文件（两个文件需要在同一账号下，超过1000个时会自动分批移动） MoveRange
+        16. 得到公开空间的访问地址 GetPublishUrl
+        17. 得到私有空间的访问地址 GetPrivateUrl
+        18. 下载文件到本地 Download
+        19. 设置生存时间（超时会自动删除） SetExpire
+        20. 批量设置生存时间（超时会自动删除） SetExpireRange
+        21. 修改文件MimeType ChangeMime
+        22. 批量更改文件mime ChangeMimeRange
+        23. 修改文件存储类型 ChangeType
+        24. 批量更改文件类型 ChangeTypeRange
+        25. 获取指定前缀的文件列表 ListFiles
 
     其中IBucketProvider对外提供以下方法
 
         1. 获取空间列表 GetBucketList
         2. 创建空间 Create
         3. 设置空间的镜像源 SetSource
-        4. 删除空间 Delete
-        5. 获取域名空间信息 SetPermiss
-        6. 设置空间访问权限 SetTag
-        7. 得到空间标签 GetTags
-        8. 清除空间标签 ClearTag
+        4. 获取空间域名信息 GetHost
+        5. 删除空间 Delete
+        6. 获取域名空间信息 SetPermiss
+        7. 设置空间访问权限 SetTag
+        8. 得到空间标签 GetTags
+        9. 清除空间标签 ClearTag
 
     具体的方法用法可查看源码使用，其中定义的比较简单，在调用时也有相对应的注释，如果确实有不容易理解的会在文档中标注。
 
   
 &emsp;&emsp;<a href ="https://github.com/zhenlei520/System.Extension.Core.Demo/tree/master/Storage/System.Extension.Core.AspNetCore.QiNiuStorage" target="_blank">点击查看完整示例</a> 
 
-以上代码支持最新预览版，且自2.0.1-beta-027后，云存储默认配置中只有默认空间，默认空间域以及默认空间对应的区域，如果希望某个方法不对默认配置中的空间操作，请配置参数中的策略属性
+&emsp;&emsp;以上代码支持最新预览版，且自2.0.1-beta-027后，云存储默认配置中只有默认空间，默认空间域以及默认空间对应的区域，如果希望某个方法不对默认配置中的空间操作，请配置参数中的策略属性
+
+&emsp;&emsp;七牛存储是通过单例模式进行诸如，目前如果在一个项目中如果只使用一个账号的情况下可通过ioc进行注入，但如果你的场景是需要用到多个七牛账号进行操作的话，建议您直接通过初始化BucketProvider、StorageProvider、PictureProvider类进行操作，相比单例模式，仅仅只是默认配置文件的差别，之前有想过再分一个包来处理，但仔细想过之后发现效果与直接初始化BucketProvider、StorageProvider、PictureProvider类类似，所以就没继续进行分离，如果您有这方面的场景需要，可通过此方法进行，如果您的场景下除了七牛云存储外可能还有阿里云oss、腾讯云oss的可能性，后期包也会提供，您当前可以通过再分拆阿里云、七牛云、腾讯云三个类库后引用不同的EInfrastructure.Core的存储包，为您节省了参数响应以及传参不统一的问题，之后上线阿里云以及腾讯云oss后为您节省更多的开发时间，如果您有其他的oss存储空间的话，也欢迎您与我们的包进行集成，让其集成变得更简单

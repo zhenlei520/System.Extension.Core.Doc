@@ -719,6 +719,13 @@ ShallowClone：浅拷贝
     string str="hello EInfrastructure.Core";
     UniqueCommon.GetHashCode(str);//同一个字符串在不同机器上的HashCode一样
 
+### 雪花id生成算法（long类型的主键id）
+
+    SnowflakeId sn = new SnowflakeId(15, 3);
+    
+    sn.NextId();//得到id
+
+
 ## Url帮助类
 
 ### 得到url地址：
