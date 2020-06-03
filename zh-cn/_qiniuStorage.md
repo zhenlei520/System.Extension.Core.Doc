@@ -45,8 +45,7 @@
     其中IPictureProvider对外提供了以下方法：
         
         1. 根据图片base64上传 Upload
-        2. 抓取资源到空间  FetchFile
-        3. 空间管理 IBucketProvider
+        2. 空间管理 IBucketProvider
 
     其中IStorageProvider对外提供了以下方法：
 
@@ -75,6 +74,7 @@
         23. 修改文件存储类型 ChangeType
         24. 批量更改文件类型 ChangeTypeRange
         25. 获取指定前缀的文件列表 ListFiles
+        26. 抓取资源到空间  FetchFile
 
     其中IBucketProvider对外提供以下方法
 
