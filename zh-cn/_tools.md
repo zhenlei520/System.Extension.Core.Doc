@@ -159,7 +159,7 @@ ConvertToBool obj转bool
 
 ### 转换为bool
 
-    short i=1.ConvertToBool(false);//object类型墙砖为bool类型，如果转换失败，则默认为false，其中智能识别True与TRUE、False与FALSE、0、1、不、否、是、失败、fail、no、lose、ok、success、yes、成功
+    short i=1.ConvertToBool(false);//object类型墙砖为bool类型，如果转换失败，则默认为false，其中智能识别True与TRUE、False与FALSE
     short i=1.ConvertToBool();//object类型墙砖为bool类型，如果转换失败，则默认为null
 
 ### 转换为byte
