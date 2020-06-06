@@ -843,13 +843,16 @@ ShallowClone：浅拷贝
 
 ### 将文件内容转换成Base64格式 
 
-   FileCommon.FileToBase64("本地文件绝对地址");//将文件转换成Base64格式
-   FileCommon.FileToBase64Async("本地文件绝对地址");//将文件转换成Base64格式（异步）
+
+    FileCommon.FileToBase64("本地文件绝对地址");//将文件转换成Base64格式
+
+    FileCommon.FileToBase64Async("本地文件绝对地址");//将文件转换成Base64格式（异步）
 
 ### 将文件内容转换为byte数组
 
     FileCommon.ConvertFileToByte("本地文件绝对地址");//将文件内容转换成byte数组
-   FileCommon.ConvertFileToByteAsync("本地文件绝对地址");//将文件内容转换成byte数组（异步）
+
+    FileCommon.ConvertFileToByteAsync("本地文件绝对地址");//将文件内容转换成byte数组（异步）
 
 ###  将byte[]数组保存成文件
 
@@ -858,9 +861,11 @@ ShallowClone：浅拷贝
 ### 获取文件内容
 
     FileCommon.GetFileContent("本地文件绝对地址");//获取文件内容（支持换行读取）
+
     FileCommon.GetFileContentAsync("本地文件绝对地址");//获取文件内容（支持换行读取）异步读取
 
     FileCommon.GetContentFormFile("本地文件绝对地址","编码方式");//获取文件内容（每行读取）,得到文本集合，每行一条数据
+    
     FileCommon.GetContenFormFileAsync("本地文件绝对地址");//获取文件内容（每行读取）,返回内容集合，按照行返回（异步）
 
 ## 自定义属性
