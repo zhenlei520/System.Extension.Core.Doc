@@ -1075,3 +1075,11 @@ ShallowClone：浅拷贝
     },(cts)=>{
          Console.WriteLine("创建线程任务2");
     });
+
+## 异常帮助类
+
+### 提取异常及其内部异常堆栈跟踪
+
+    Exception ex=new Exception("自定义异常");
+    ExceptionCommon.ExtractAllStackTrace(ex);//或者简写为ex.ExtractAllStackTrace();
+

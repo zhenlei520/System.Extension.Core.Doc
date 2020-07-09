@@ -37,16 +37,15 @@
 
 ### 二、使用七牛操作文件信息
 
-#### 通过上方的配置可以在控制器中使用IStorageProvider、IPictureProvider两个接口的方法
+#### 通过上方的配置可以在控制器中使用IStorageProvider、IPictureProvider、IBucketProvider三个接口的方法
 
 1. IStorageProvider 文件存储管理
 1. IPictureProvider 图片存储管理
 1. IBucketProvider 空间管理
 
-##### 其中IPictureProvider对外提供了以下方法：
+#### 其中IPictureProvider对外提供了以下方法：
         
-1. 根据图片base64上传 Upload
-
+1. 根据图片base64上传 Upload （暂不提供图片处理，仅支持普通的图片上传）
 
 #### 其中IStorageProvider对外提供了以下方法：
 
