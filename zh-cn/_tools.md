@@ -976,60 +976,55 @@ ShallowClone：浅拷贝
 
 ### 多线程执行任务（可控制最大线程数）
 
+1. 控制最大线程数，当线程数达到一定时间后仍然无任务处理，将会被释放，后添加新任务后会继续添加线程，但最大线程数不变
 
     public class Users
     {
         public string Name { get; set; }
+
+        public bool Gender { get; set; }
     }
 
     例如多线程输出一个消息通知：
 
-    TaskCommon<string> taskCommon = new TaskCommon<string>(20);
-
-    List<Users> users = new List<Users>();
-    for (var i = 0; i < 30; i++)
+    TaskPool<string> taskCommon = new TaskPool<string>(200, (name) =>
     {
-        users.Add(new Users()
+        lock (index + "")
+        {
+            index++;
+            Console.WriteLine("我的名字是：" + name + "，线程id：" + Task.CurrentId + "，任务index：" +
+                                index);
+            Thread.Sleep(new Random().Next(100, 300));
+        }
+    }, () =>
+    {
+        Console.WriteLine("任务执行完成");
+    }, () =>
+    {
+        Console.WriteLine("线程已销毁");
+    }, 300);
+
+    List<Users> userses = new List<Users>();
+    for (var i = 0; i < 9999; i++)
+    {
+        userses.Add(new Users()
         {
             Name = "我的名字是" + i
         });
     }
 
-    foreach (var item in users)
+    foreach (var item in userses)
     {
-        taskCommon.Add(item.Name, (name) =>
-        {
-            Console.WriteLine("我的名字是：" + name);
-            Thread.Sleep(new Random().Next(1000, 3999));
-        });
+        taskCommon.AddJob(item.Name);//添加线程任务
     }
 
-### 多线程执行任务，且任务执行后执行一个方法（可控制最大线程数）
-
-    TaskCommon<string, object> taskCommon = new TaskCommon<string, object>(20);
-    List<Users> users = new List<Users>();
-    for (var i = 0; i < 30; i++)
+    taskCommon.SetContinueTimer(0);//设置线程超时空闲被移除的时间
+    taskCommon.Run();//开启线程任务
+    while (index < userses.Count)
     {
-        users.Add(new Users()
-        {
-            Name = "我的名字是" + i
-        });
-    }
-
-    foreach (var item in users)
-    {
-        taskCommon.Add(item.Name, (name) =>
-        {
-            Console.WriteLine("我的名字是：" + name);
-            Thread.Sleep(new Random().Next(1000, 3999));
-            return "结束了" + "我的名字是：" + name;
-        }, (state, res, exception) =>
-        {
-            if (state)
-            {
-                //任务完成后需要执行的工作
-            }
-        });
+        // Thread.Sleep(10000);
+        // Thread.Yield();
+        Thread.Sleep(100);
     }
 
 ## 多线程任务（无法控制最大线程数）
@@ -1082,4 +1077,17 @@ ShallowClone：浅拷贝
 
     Exception ex=new Exception("自定义异常");
     ExceptionCommon.ExtractAllStackTrace(ex);//或者简写为ex.ExtractAllStackTrace();
+
+## 货币类型帮助类
+
+### 转换为货币
+
+    CurrencyTypeConversionCommon.ConvertToCurrency(1.2,CurrencyType.Cny);//转为人民币，或简写为1.2.ConvertToCurrency();其中货币类型默认人民币，且当前仅支持人民币
+
+## 短参数帮助类
+
+### 得到短参数的值（可用于短链接等）
+
+    ShortenCommon.GetShortParam("参数",6);//默认生成的短链接长度为6位
+    ShortenCommon.GetShortParam("参数","md5盐",6);//默认生成的短链接长度为6位
 
