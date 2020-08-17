@@ -86,6 +86,17 @@
 
     StringCommon.FirstUpperCase("helloWorld");//输出HelloWorld
 
+### 正则表达式匹配
+
+    "".Match("regex");//完整写法：StringCommon.Match("待匹配的字符串","regex");//通过正则匹配，返回的值是List<KeyValuePair<string, string[]>>，其中key为每组中匹配到的值，value的中为每组的匹配结果，支持正则表达式模式匹配如下所示：
+
+    "".Match("regex",RegexOptions.IgnoreCase);
+
+### 正则表达式验证
+
+    "".Test("regex");//根据输入的正则表达式判断是否能匹配成功
+    "".Test("regex",RegexOptions.IgnoreCase);//根据输入的正则表达式判断是否能匹配成功(增加模式匹配)
+
 ### 清除字符串数组中的重复项以及对字符串进行剪切
 
      List<string> list = new List<string>()
@@ -341,7 +352,7 @@ ConvertToBool obj转bool
 
     TimeCommon.GetBirthday("41****************");//获取生日，支持15、18位身份证号
 
-## 验证帮助类
+## 验证帮助类（2.3.6 新增可通过ValidateCommon.SetRegexConfigurations(new RegexConfigurationsValidateDefault())）可调整修改验证方法的结果，默认使用的是RegexConfigurationsValidateDefault的规则
 
 ### 是否邮政编码
 
@@ -400,6 +411,15 @@ ConvertToBool obj转bool
 
     "github.com/zhenlei520".IsChinese();//输出结果：false
     "百度".IsChinese();//输出结果：true
+
+### 判断字符串是否是Null或者空
+
+    "test".IsNullOrEmpty();//输出：false
+
+### 判断是否是Null或者空格或者空
+
+    "test".IsNullOrWhiteSpace();//输出：false
+
 
 ## 枚举帮助类
 
@@ -820,7 +840,8 @@ ShallowClone：浅拷贝
 
 ### 得到安全字符串(期初字符串首尾空格，当值为null时返回空字符串)
 
-    " 小磊 ".SafeString();//输出结果：小磊 （空格会被移除）
+    " 小磊 ".SafeString(true);//输出结果：小磊 （空格会被移除），可根据参数调节是否移除空格
+
 
 
 ## 文件帮助类

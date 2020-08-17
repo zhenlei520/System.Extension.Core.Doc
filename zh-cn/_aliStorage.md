@@ -1,6 +1,6 @@
 # 阿里云Oss存储(引用EInfrastructure.Core.Aliyun.Storage包后即可使用)
 
-&emsp;&emsp;阿里云Oss存储，是目前常用的云存储服务商的其中一种，此类库目前提供了根据文件流、字节数组上传、判断文件是否存在以及批量复制、删除文件、批量移动文件抓取资源等方法，目前文档版本2.3.3
+&emsp;&emsp;阿里云Oss存储，是目前常用的云存储服务商的其中一种，此类库目前提供了根据文件流、字节数组上传、判断文件是否存在以及批量复制、删除文件、批量移动文件抓取资源等方法，目前文档版本2.3.6
 
 [![NuGet](https://img.shields.io/nuget/v/EInfrastructure.Core.Aliyun.Storage.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Aliyun.Storage)
 [![NuGet Download](https://img.shields.io/nuget/dt/EInfrastructure.Core.Aliyun.Storage.svg?style=flat-square)](https://www.nuget.org/packages/EInfrastructure.Core.Aliyun.Storage)
