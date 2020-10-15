@@ -86,7 +86,21 @@
                 '/zh-cn': '/zh-cn/cover.md'
             },
             onlycover:true,
-            disqus: 'shortname'//评论系统
+            disqus: 'shortname',//评论系统
+            plugins: [
+                function(hook) {
+                    var footer = [
+                        '<hr/>',
+                        '<footer>',
+                        '© 2018-2020 bflove.cn 版权所有 <a href="http://beian.miit.gov.cn/" target="_blank">豫ICP备18010794号-1</a>',
+                        '</footer>'
+                    ].join('');
+
+                    hook.afterEach(function(html) {
+                        return html + footer;
+                    });
+                }
+            ]
         }
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
@@ -120,6 +134,7 @@
     <!-- <script src="//unpkg.com/docsify"></script>
     <script src="//unpkg.com/prismjs/components/prism-bash.js"></script>
     <script src="//unpkg.com/prismjs/components/prism-php.js"></script> -->
+    <div style="position: absolute;left: 40%;bottom: 10px;">© 2018-2020 bflove.cn 版权所有 <a href="http://beian.miit.gov.cn/" target="_blank">豫ICP备18010794号-1</a></div>
 </body>
 <style>
     .app-name .app-name-link img {
