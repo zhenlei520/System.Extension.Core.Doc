@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-16 00:32:09
+ * @LastEditTime: 2021-01-05 01:02:18
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \System.Extension.Core.Doc\docs\2.3.6\quickstart.md
+-->
 &emsp;&emsp;System.Extension.Core 框架是netstandard2.0.netstandard2.1 ，可以在netcore2.0以及Framework 4.6.1以上版本运行，详细情况可在微软官方文档中找到。<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/net-standard" target="_blank">查看netstandard的支持版本</a>
 
 
@@ -5,4 +13,4 @@
 
 
 项目依赖关系简图：
-![avatar](../_media/BaseFlow.png)
+![avatar](../../_media/BaseFlow.png)

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-10-16 00:32:09
- * @LastEditTime: 2021-01-05 00:57:34
+ * @LastEditTime: 2021-01-05 01:02:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \System.Extension.Core.Doc\docs\abstract.md
@@ -17,8 +17,8 @@
 
 <div>
   <p align="right">
-    <img style="width:150px;height:150px;" src="./_media/wechat.jpg">
-    <img style="width:150px;height:170px;margin-left:50px;" src="./_media/qq.jpg">
+    <img style="width:150px;height:150px;" src="../_media/wechat.jpg">
+    <img style="width:150px;height:170px;margin-left:50px;" src="../_media/qq.jpg">
   </p>
   <p align="right">
    
